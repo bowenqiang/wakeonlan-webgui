@@ -18,6 +18,7 @@ exports.fetchDevicesList = (req, res) => {
         console.log(err);
         res.status(500).send({ message: `Error retrieving device list`});
     });
+
 };
 
 // Add a new device
@@ -59,7 +60,7 @@ exports.deleteDevice = (req, res) => {
     const query = {
         mac_address: mac_address
     }
-    Devices.findOneAndDelete(query)
+    Devices.deleteMany(query)
       .then(data => {
         if (!data) {
           res.status(404).send({
@@ -85,6 +86,7 @@ exports.wakeOnLan = (req, res) => {
         return;
     }
     wol.wake(mac_address, function(err, result) {
+        console.log(result);
         if (err) {
             res.status(500).send({
                 message: "Could not Wake Device with mac=" + mac_address

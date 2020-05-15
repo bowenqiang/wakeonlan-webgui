@@ -38,7 +38,7 @@ require('./routes/devices.routes')(app);
 
 const utils = require('./utils/utils');
 
-app.locals.addNewDevice = utils.addNewDevice;
+app.use(express.static(__dirname + '/views/pages'));
 
 // index page 
 app.get('/', (req, res) => {
@@ -55,7 +55,9 @@ app.get('/', (req, res) => {
         
     }
     init();
-
+});
+app.get('/new', (req, res) => {
+    res.render('pages/new');
 });
 
 const PORT = process.env.PORT || 3000;
