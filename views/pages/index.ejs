@@ -1,0 +1,126 @@
+<!-- views/pages/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head') %>
+    <style>
+        /* The sidebar menu */
+        .sidenav {
+            height: 100%;
+            /* Full-height: remove this if you want "auto" height */
+            width: 160px;
+            /* Set the width of the sidebar */
+            position: fixed;
+            /* Fixed Sidebar (stay in place on scroll) */
+            z-index: 1;
+            /* Stay on top */
+            top: 0;
+            /* Stay at the top */
+            left: 0;
+            background-color: #111;
+            /* Black */
+            overflow-x: hidden;
+            /* Disable horizontal scroll */
+            padding-top: 20px;
+        }
+
+        /* The navigation menu links */
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Style page content */
+        .main {
+            margin-left: 160px;
+            /* Same as the width of the sidebar */
+            padding: 0px 10px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body class="container">
+    <div class="sidenav">
+        <a href="/">Home</a>
+        <a href="/new">Create New</a>
+    </div>
+    <div class="main">
+        <form action="/api/devices" method="POST" onsubmit="myFunction()">
+            <p>Host Name: <input type='text' name="hostname"/></p>
+            <p>Mac Address: <input type='text' name="mac_address"/></p>
+            <p>Ip4 Address: <input type='text' name="ip4_address"/></p>
+            <p>Ip6 Address: <input type='text' name="ip6_address"/></p>
+            <input type="submit" value="submit" />
+        </form>
+        <h1>Device List :</h1>
+        <ul>
+            <% devicesList.forEach(function(device) { %>
+            <li value="<%= device.mac_address %>">
+                <%= device.hostname%>
+                <%= device.mac_address%>
+                <%= device.ip4_address%>
+                <%= device.ip6_address%>
+                <button class="wakeBtn" onclick="wakeDevice('<%= device.mac_address %>')">Wake</button>
+                <button class="deleteBtn" onclick="deleteDevice('<%= device.mac_address %>')">Del</button>
+            </li>
+            <% }); %>
+        </ul>
+    </div>
+    <script>
+        function deleteDevice(mac) {
+            var baseUrl = getBaseUrl();
+            var reqUrl = baseUrl + "/api/devices?mac=" + mac;
+            var xhr = new XMLHttpRequest();
+            xhr.open("DELETE", reqUrl, true);
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == "200") {
+                    window.location = baseUrl;
+                }
+            }
+            xhr.send(null);
+        }
+
+        function wakeDevice(mac) {
+            var baseUrl = getBaseUrl();
+            var reqUrl = baseUrl + "/api/devices/wol?mac=" + mac;
+            var xhr  = new XMLHttpRequest()
+            xhr.open('GET', reqUrl, true)
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == "200") {
+                    
+                } else {
+ 
+                }
+            }
+            xhr.send(null);
+        }
+
+        function getBaseUrl() {
+            var url = window.location.href;
+            var arr = url.split("/");
+            return arr[0] + "//" + arr[2];
+        }
+    </script>
+</body>
+
+</html>
