@@ -56,8 +56,8 @@ app.get('/', (req, res) => {
     }
     init();
 });
-app.get('/new', (req, res) => {
-    res.render('pages/new');
+app.get('/create', (req, res) => {
+    res.render('pages/create');
 });
 
 const PORT = process.env.PORT || 3000;

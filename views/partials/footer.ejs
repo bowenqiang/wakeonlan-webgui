@@ -1,2 +1,15 @@
 <!-- views/partials/footer.ejs -->
-<p class="text-center text-muted">© Copyright 2014 The Awesome People</p>
+<p class="footer">© Copyright 2020 bowenqiang@gmail.com</p>
+<script>
+    var pathname = window.location.pathname;
+    var elem = null
+    switch(pathname) {
+        case "/":
+            elem = document.getElementById("homepage");
+            break;
+        case "/create":
+            elem = document.getElementById('create');
+            break;
+    }
+    elem.classList.add("active");
+</script>

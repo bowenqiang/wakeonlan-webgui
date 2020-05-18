@@ -4,6 +4,9 @@
     position: fixed;
     top: 0;
     background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .nav a {
     color: white;
@@ -13,7 +16,8 @@
     text-align: center;
     padding: 0.14rem 0.16rem;
     text-decoration: none;
-    line-height: 0.6rem;;
+    line-height: 0.6rem;
+    border-radius: 0.2rem;
 }
 .nav a.active {
     background-color: #4CAF50;
@@ -47,5 +51,92 @@
     font-size: 0.5rem;
     margin-bottom: 0.3rem;
     background-color: #563c8c;
+    border-radius: 0.2rem;
+    padding: 0.3rem;
+    color: white;
 }
 
+.main .device-list .wakeBtn,.deleteBtn {
+    background-color: yellow;
+    font-weight: bold;
+    font-size: 0.4rem;
+    width: 100%;
+    border-radius: 0.1rem;
+    color: #333;
+    height: 1.0rem;
+}
+
+.wrapper.create .main {
+    /* max-width: 600px; */
+    width: 90%;
+    margin: 0 auto;
+    background-color: #563c8c;
+    border-radius: 0.3rem;
+    padding: 0.4rem 0.4rem;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: initial;
+    bottom: initial;
+}
+
+.wrapper.create form{
+    font-size: 0.7rem;
+    color: white;
+}
+
+.wrapper.create form input {
+    width: 100%;
+    margin-top: 0.05rem;
+}
+
+.wrapper.create .submit {
+    margin-top: 0.2rem;
+    border-radius: 0.2rem;
+    color: black;
+    background-color: cornflowerblue;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.4rem;
+    position: fixed;
+    bottom: 0;
+    display: none;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    html {
+        font-size: 100px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    html {
+        font-size: 70px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    html {
+        font-size: 60px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    html {
+        font-size: 50px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    html {
+        font-size: 50px;
+    }
+}

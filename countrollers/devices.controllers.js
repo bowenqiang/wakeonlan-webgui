@@ -52,19 +52,17 @@ exports.addNewDevice = (req, res) => {
 
 //Delete a select device
 exports.deleteDevice = (req, res) => {
-    const mac_address = req.query.mac;
-    if (!mac_address) {
-        res.status(400).send({ message: "mac address can't be empty"});
+    const id = req.query.id;
+    if (!id) {
+        res.status(400).send({ message: "no device selected"});
         return;
     }
-    const query = {
-        mac_address: mac_address
-    }
-    Devices.deleteMany(query)
+
+    Devices.findByIdAndRemove(id)
       .then(data => {
         if (!data) {
           res.status(404).send({
-            message: `Cannot delete Device with mac=${mac_address}. Maybe Device was not found!`
+            message: `Cannot delete Device with id=${id}. Maybe Device was not found!`
           });
         } else {
             res.send({
@@ -74,7 +72,7 @@ exports.deleteDevice = (req, res) => {
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete Device with mac=" + mac_address
+          message: "Could not delete Device with id=" + id
         });
       });
 }

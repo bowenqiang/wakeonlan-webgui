@@ -1,0 +1,25 @@
+<!-- views/pages/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head') %>
+</head>
+
+<body>
+    <%- include ('../partials/header') %>
+    <div class="wrapper create">
+        <div class="main">
+            <form action="/api/devices" method="POST">
+                <p>Host Name: <input type='text' name="hostname" required placeholder="Host Name"/></p>
+                <p>Mac Address: <input type='text' name="mac_address" required placeholder="Mac Address"/></p>
+                <p>Ip4 Address: <input type='text' name="ip4_address" placeholder="Optional"/></p>
+                <p>Ip6 Address: <input type='text' name="ip6_address" placeholder="Optional"/></p>
+                <input class="submit" type="submit" value="submit" />
+            </form>
+        </div>
+    </div>
+    <%- include ('../partials/footer') %>
+</body>
+
+</html>

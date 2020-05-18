@@ -12,28 +12,39 @@
         <div class="main">
             <h1>Device List :</h1>
             <ul>
-                <% devicesList.forEach(function(device) { %>
-                <li value="<%= device.mac_address %>" class="device-list">
-                    <div class="row justify-content-md-center">
-                        <div class="col-sm-12"><%= device.hostname%></div>
-                        <div class="col-sm-12"><%= device.mac_address%></div>
-                        <div class="col-sm-12"><%= device.ip4_address%></div>
-                        <div class="col-sm-12"><%= device.ip6_address%></div>
-                        <div class="col-sm-12">
-                            <button class="wakeBtn" onclick="wakeDevice('<%= device.mac_address %>')">Wake</button>
-                            <button class="deleteBtn" onclick="deleteDevice('<%= device.mac_address %>')">Del</button>
+                <div class="row">
+                    <% devicesList.forEach(function(device) { %>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <li value="<%= device.id %>" class="device-list">
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-12"><%= device.hostname%></div>
+                                    <div class="col-sm-12"><%= device.mac_address%></div>
+                                    <div class="col-sm-12"><%= device.ip4_address%></div>
+                                    <div class="col-sm-12"><%= device.ip6_address%></div>
+                                    <div class="col-sm-12">
+                                        <div  class="row justify-content-center">
+                                            <div class="col-sm-6">
+                                                <button class="wakeBtn" onclick="wakeDevice('<%= device.mac_address %>')">Wake Up</button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button class="deleteBtn" onclick="deleteDevice('<%= device.id %>')">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                         </div>
-                    </div>
-                </li>
-                <% }); %>
+                    <% }); %>
+                </div>
             </ul>
         </div>
     </div>
+    <%- include ('../partials/footer') %>
 
     <script>
-        function deleteDevice(mac) {
+        function deleteDevice(id) {
             var baseUrl = getBaseUrl();
-            var reqUrl = baseUrl + "/api/devices?mac=" + mac;
+            var reqUrl = baseUrl + "/api/devices?id=" + id;
             var xhr = new XMLHttpRequest();
             xhr.open("DELETE", reqUrl, true);
             xhr.onload = function () {
@@ -51,9 +62,7 @@
             xhr.open('GET', reqUrl, true)
             xhr.onload = function () {
                 if (xhr.readyState == 4 && xhr.status == "200") {
-                    
-                } else {
- 
+                    alert("Successfully wake up Device with mac: " + mac);
                 }
             }
             xhr.send(null);
