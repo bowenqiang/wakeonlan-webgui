@@ -27,18 +27,21 @@
     top: 1.5rem;
     bottom: 0rem;
     width: 100vw;
-    overflow: scroll;
+    overflow: hidden;
     background-color: teal;
 }
 .main {
     position: relative;
     bottom: 0;
-    overflow: scroll;
+    overflow-y: scroll;
     padding: 0 0.5rem;
+    height: 100%;
+
 }
 
 .main h1 {
     font-size: 0.8rem;
+    font-weight: bold;
 }
 
 .main ul {
@@ -57,13 +60,19 @@
 }
 
 .main .device-list .wakeBtn,.deleteBtn {
-    background-color: yellow;
     font-weight: bold;
     font-size: 0.4rem;
     width: 100%;
     border-radius: 0.1rem;
     color: #333;
     height: 1.0rem;
+}
+
+.wakeBtn {
+    background-color: yellowgreen;
+}
+.deleteBtn {
+    background-color: palevioletred;
 }
 
 .wrapper.create .main {
@@ -79,6 +88,7 @@
     transform: translate(-50%, -50%);
     overflow: initial;
     bottom: initial;
+    height: inherit;
 }
 
 .wrapper.create form{
