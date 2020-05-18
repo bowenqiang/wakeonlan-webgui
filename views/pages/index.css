@@ -76,7 +76,6 @@
 }
 
 .wrapper.create .main {
-    /* max-width: 600px; */
     width: 90%;
     margin: 0 auto;
     background-color: #563c8c;
@@ -99,6 +98,7 @@
 .wrapper.create form input {
     width: 100%;
     margin-top: 0.05rem;
+    color: #333;
 }
 
 .wrapper.create .submit {
