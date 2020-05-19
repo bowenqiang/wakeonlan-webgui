@@ -59,7 +59,7 @@
     color: white;
 }
 
-.main .device-list .wakeBtn,.deleteBtn {
+.main .device-list .wakeBtn,.deleteBtn,.addBtn {
     font-weight: bold;
     font-size: 0.4rem;
     width: 100%;
@@ -73,6 +73,9 @@
 }
 .deleteBtn {
     background-color: palevioletred;
+}
+.addBtn {
+    background-color: skyblue;
 }
 
 .wrapper.create .main {

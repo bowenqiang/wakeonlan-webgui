@@ -15,6 +15,8 @@
             </div>
             <div id="complete">
                 <p>All Device on the network:</p>
+                <ul id="content">
+                </ul>
             </div>
         </div>
     </div>
@@ -27,9 +29,25 @@
             xhr.open('GET', reqUrl, true)
             xhr.onload = function () {
                 if (xhr.readyState == 4 && xhr.status == "200") {
-                    const scanResult = xhr.response;
+                    var scanResult = JSON.parse(xhr.response);
                     if(scanResult && scanResult.length) {
-                        
+                        var elem = document.createElement("div");
+                        elem.classList.add('row');
+                        scanResult.forEach(function(item){
+                            var li = document.createElement('li');
+                            li.classList.add("device-list");
+                            li.innerHTML= 
+                                `<div class="row justify-content-center">
+                                        <div class="col-sm-12">${item.hostname}</div>
+                                        <div class="col-sm-12">${item.mac_address}</div>
+                                        <div class="col-sm-12">${item.ip4_address}</div>
+                                        <div class="col-sm-12">
+                                            <button class="addBtn" onclick="addDevice(${JSON.stringify(item)})">Add Device</button>
+                                        </div>
+                                </div>`
+                            elem.appendChild(li);
+                        });
+                        document.getElementById('content').appendChild(elem);
                     }
                 }
             }
@@ -37,11 +55,17 @@
         }
         init();
 
+        function addDevice(data) {
+            var device = JSON.parse(data);
+            console.log(device);
+        }
+
         function getBaseUrl() {
             var url = window.location.href;
             var arr = url.split("/");
             return arr[0] + "//" + arr[2];
         }
+
 
     </script>
 </body>
