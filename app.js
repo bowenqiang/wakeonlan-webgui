@@ -2,8 +2,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const axios = require('axios');
-
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -58,6 +56,10 @@ app.get('/', (req, res) => {
 });
 app.get('/create', (req, res) => {
     res.render('pages/create');
+});
+
+app.get('/scan', (req, res) => {
+    res.render('pages/scan');
 });
 
 const PORT = process.env.PORT || 3000;

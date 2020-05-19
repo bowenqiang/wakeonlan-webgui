@@ -2,6 +2,7 @@ const db = require("../models/index");
 const Devices = db.devices;
 const url = require('url');
 const wol = require('wol');
+const netList = require('network-list');
 
 // Find all devices
 exports.fetchDevicesList = (req, res) => {
@@ -30,7 +31,7 @@ exports.addNewDevice = (req, res) => {
 
     const device = new Devices({
         hostname: req.body.hostname,
-        mac_address: req.body.mac_address,
+        mac_address: req.body.mac_address.toUpperCase(),
         ip4_address: req.body.ip4_address || "",
         ip6_address: req.body.ip6_address || "",
     });
@@ -84,7 +85,7 @@ exports.wakeOnLan = (req, res) => {
         return;
     }
     wol.wake(mac_address, function(err, result) {
-        console.log(result);
+        // console.log(result);
         if (err) {
             res.status(500).send({
                 message: "Could not Wake Device with mac=" + mac_address
@@ -96,4 +97,23 @@ exports.wakeOnLan = (req, res) => {
             })
         }    
     });
+}
+
+exports.scan = (req, res) => {
+    const options = {
+        vendor: false,
+    }
+    const netScan = netList.scan;
+    netScan(options, (err, arr) => {
+        if (err) {
+            res.status(500).send({
+                message: "Failed to scan network"
+            });
+        }
+        res.send(arr.filter(item => item.alive).map(item => ({
+            hostname: item.hostname,
+            mac_address: item.mac && item.mac.toUpperCase(),
+            ip4_address: item.ip,
+        })))
+    })
 }

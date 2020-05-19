@@ -11,6 +11,8 @@ module.exports = app => {
     //Delete a device with mac address
     router.delete("/", devices.deleteDevice);
 
+    router.get("/scan", devices.scan);
+
     //Wake up a device
     router.get("/wol", devices.wakeOnLan);
     app.use("/api/devices", router);

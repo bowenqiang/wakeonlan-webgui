@@ -1,6 +1,11 @@
 const db = require("../models/index");
+var spawn = require('child_process');              // spawn process
+var os = require('os');                            // OS access
 const Devices = db.devices;
 var url = require('url');
+const netList = require('network-list');
+const util = require('util');
+
 
 // Find all devices
 exports.fetchDevicesList = async () => {
@@ -20,3 +25,5 @@ exports.fetchDevicesList = async () => {
     }
 
 };
+
+

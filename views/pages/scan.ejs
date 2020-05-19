@@ -1,0 +1,49 @@
+<!-- views/pages/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head') %>
+</head>
+
+<body>
+    <%- include ('../partials/header') %>
+    <div class="wrapper scan">
+        <div class="main">
+            <div id="loading">
+                <p>Scaning, It might take a while</p>
+            </div>
+            <div id="complete">
+                <p>All Device on the network:</p>
+            </div>
+        </div>
+    </div>
+    <%- include ('../partials/footer') %>
+    <script>
+        function init() {
+            var baseUrl = getBaseUrl();
+            var reqUrl = baseUrl + "/api/devices/scan";
+            var xhr  = new XMLHttpRequest()
+            xhr.open('GET', reqUrl, true)
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == "200") {
+                    const scanResult = xhr.response;
+                    if(scanResult && scanResult.length) {
+                        
+                    }
+                }
+            }
+            xhr.send(null);
+        }
+        init();
+
+        function getBaseUrl() {
+            var url = window.location.href;
+            var arr = url.split("/");
+            return arr[0] + "//" + arr[2];
+        }
+
+    </script>
+</body>
+
+</html>
