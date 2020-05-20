@@ -11,10 +11,10 @@
     <div class="wrapper scan">
         <div class="main">
             <div id="loading">
-                <p>Scaning, It might take a while</p>
+                <p class="title">Scanning, It might take a while....</p>
             </div>
-            <div id="complete">
-                <p>All Device on the network:</p>
+            <div id="complete" style="display: none;">
+                <p class="title">All Device on the network:</p>
                 <ul id="content">
                 </ul>
             </div>
@@ -38,16 +38,18 @@
                             li.classList.add("device-list");
                             li.innerHTML= 
                                 `<div class="row justify-content-center">
-                                        <div class="col-sm-12">${item.hostname}</div>
-                                        <div class="col-sm-12">${item.mac_address}</div>
-                                        <div class="col-sm-12">${item.ip4_address}</div>
+                                        <div class="col-sm-12">${item.hostname || 'Unknown'}</div>
+                                        <div class="col-sm-12">${item.mac_address || 'Unknown'}</div>
+                                        <div class="col-sm-12">${item.ip4_address || 'Unknown'}</div>
                                         <div class="col-sm-12">
-                                            <button class="addBtn" onclick="addDevice(${JSON.stringify(item)})">Add Device</button>
+                                            <button class="addBtn" onclick='addDevice(${JSON.stringify(item)})'>Add Device</button>
                                         </div>
                                 </div>`
                             elem.appendChild(li);
                         });
                         document.getElementById('content').appendChild(elem);
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('complete').style.display = 'block';
                     }
                 }
             }
@@ -55,9 +57,19 @@
         }
         init();
 
-        function addDevice(data) {
-            var device = JSON.parse(data);
-            console.log(device);
+        function addDevice(device) {
+            var baseUrl = getBaseUrl();
+            var reqUrl = baseUrl + "/api/devices";
+            var params = `hostname=${device.hostname}&mac_address=${device.mac_address}&ip4_address=${device.ip4_address}`;
+            var xhr  = new XMLHttpRequest()
+            xhr.open('POST', reqUrl, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == "201") {
+                    alert("Successfully add Device with mac: " + device.mac_address);
+                }
+            }
+            xhr.send(params);
         }
 
         function getBaseUrl() {

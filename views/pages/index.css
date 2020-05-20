@@ -8,7 +8,7 @@
     justify-content: center;
     align-items: center;
 }
-.nav a {
+.nav a.nav-item {
     color: white;
     font-weight: 400;
     font-size: 0.6rem;
@@ -18,6 +18,7 @@
     text-decoration: none;
     line-height: 0.6rem;
     border-radius: 0.2rem;
+    margin: 0 0.2rem;
 }
 .nav a.active {
     background-color: #4CAF50;
@@ -34,9 +35,8 @@
     position: relative;
     bottom: 0;
     overflow-y: scroll;
-    padding: 0 0.5rem;
+    padding: 0.5rem 0.5rem;
     height: 100%;
-
 }
 
 .main h1 {
@@ -109,6 +109,10 @@
     border-radius: 0.2rem;
     color: black;
     background-color: cornflowerblue;
+}
+
+.scan .main .title {
+    font-size: 1rem;
 }
 
 .footer {

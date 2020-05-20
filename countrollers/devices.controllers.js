@@ -42,7 +42,7 @@ exports.addNewDevice = (req, res) => {
                 protocol: req.protocol,
                 host: req.get('host'),
             });
-            res.redirect(301, homepage);
+            res.redirect(201, homepage);
         })
         .catch(err => {
             res.status(500).send({
