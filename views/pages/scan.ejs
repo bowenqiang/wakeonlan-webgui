@@ -60,13 +60,19 @@
         function addDevice(device) {
             var baseUrl = getBaseUrl();
             var reqUrl = baseUrl + "/api/devices";
-            var params = `hostname=${device.hostname}&mac_address=${device.mac_address}&ip4_address=${device.ip4_address}`;
+            var hostname = device.hostname || "unknown";
+            var mac_address = device.mac_address || "";
+            var ip4_address = device.ip4_address || "";
+            if (!mac_address) {
+                alert("Mac address can't be unknown, please add this device manually");
+            }
+            var params = `hostname=${hostname || 'Unknown'}&mac_address=${mac_address || ""}&ip4_address=${ip4_address}`;
             var xhr  = new XMLHttpRequest()
             xhr.open('POST', reqUrl, true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onload = function () {
                 if (xhr.readyState == 4 && xhr.status == "201") {
-                    alert("Successfully add Device with mac: " + device.mac_address);
+                    alert("Successfully add Device with mac: " + mac_address);
                 }
             }
             xhr.send(params);

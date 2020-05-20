@@ -3,6 +3,7 @@ const Devices = db.devices;
 const url = require('url');
 const wol = require('wol');
 const netList = require('network-list');
+const validator = require('validator');
 
 // Find all devices
 exports.fetchDevicesList = (req, res) => {
@@ -24,8 +25,8 @@ exports.fetchDevicesList = (req, res) => {
 
 // Add a new device
 exports.addNewDevice = (req, res) => {
-    if (!req.body.hostname || !req.body.mac_address) {
-        res.status(400).send({ message: "hostname or mac address can't be empty"});
+    if (!req.body.hostname || !validator.isMACAddress(req.body.mac_address)) {
+        res.status(400).send({ message: "hostname or mac address can't be empty or invalidate"});
         return;
     }
 
