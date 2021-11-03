@@ -29,7 +29,7 @@
     "local-devices": "^3.0.0",
     "mongoose": "^5.9.13",
     "network-list": "^1.1.5",
-    "validator": "^13.0.0",
+    "validator": "^13.7.0",
     "wol": "^1.0.7"
   },
   "devDependencies": {
